@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PapajVZ.Views.MainPage"
+             BackgroundColor="White"
+
+  >
+
+
+    <Grid RowSpacing="0" ColumnSpacing="0" >
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*" />
+            <RowDefinition Height="45" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+
+        <StackLayout
+
+            Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+            BackgroundColor="#F5F5F5"
+            Orientation="Vertical">
+            
+          
+            
+            <Grid ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" /> 
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Image x:Name="CarteBtn" x:Key="n_carte" Source="carte.png" Grid.Row="1" Grid.Column="0" />
+                <Image x:Name="VotesBtn" x:Key="n_heart" Source="n_heart.png" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" />
+                <Image x:Name="CardBtn" x:Key="n_card" Source="n_card.png" HorizontalOptions="Center" Grid.Row="1" Grid.Column="2" />
+                <Image x:Name="SettingsBtn" x:Key="n_settings" Source="n_settings.png"  VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Grid.Column="3" />
+
+            </Grid>
+
+
+        </StackLayout>
+
+
+    </Grid>
+
+</ContentPage>
