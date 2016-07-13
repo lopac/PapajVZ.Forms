@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/PapajVZ/PapajVZ/Helpers/Api.cs
+/PapajVZ/PapajVZ/Views/TestingPage.xaml
+/PapajVZ/PapajVZ/Views/TestingPage.xaml.cs
+/PapajVZ/PapajVZ.Droid/Assets/fonts/JosefinSans.ttf

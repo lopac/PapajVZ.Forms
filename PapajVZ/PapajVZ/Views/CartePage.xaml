@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pullToRefresh="clr-namespace:Refractored.XamForms.PullToRefresh;assembly=Refractored.XamForms.PullToRefresh"
+             x:Class="PapajVZ.Views.CartePage"
+             BackgroundColor="White">
+
+    <Grid  ColumnSpacing="0" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="42.5" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <StackLayout x:Name="CarteDateContainer" Padding="10,5,0,0" Grid.Row="0" Grid.Column="0"
+                     Orientation="Horizontal"
+                     HorizontalOptions="CenterAndExpand" BackgroundColor="White" VerticalOptions="Fill">
+
+            <Image Source="calendar.png" WidthRequest="18" VerticalOptions="Center" />
+
+            <Frame Padding="0,0,0,0" VerticalOptions="Center">
+                <Label x:Name="CarteDate" Text="PONEDJELJAK, 31.12.2016." TextColor="Black" FontSize="17" />
+            </Frame>
+
+        </StackLayout>
+
+        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" x:Name="LunchLabel" BackgroundColor="White" FontSize="17"
+                       HorizontalTextAlignment="Center" Text="RUČAK" TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Grid.Row="0" Grid.Column="1" x:Name="DinnerLabel" BackgroundColor="White" FontSize="17"
+                       HorizontalTextAlignment="Center" Text="VEČERA" TextColor="#dcdcdc"
+                       VerticalTextAlignment="Center" />
+                <BoxView Grid.Row="1" Grid.Column="0" x:Name="LunchIndicator" BackgroundColor="Black" HeightRequest="1"
+                         WidthRequest="5000" />
+                <BoxView Grid.Row="1" Grid.Column="1" x:Name="DinnerIndicator" BackgroundColor="#dcdcdc"
+                         HeightRequest="1" WidthRequest="5000" />
+            </Grid>
+        </StackLayout>
+
+
+
+        <pullToRefresh:PullToRefreshLayout x:Name="CarteContainer">
+        <StackLayout x:Name="GStackLayout" Grid.Row="3" Grid.Column="0">
+
+
+            <ScrollView BackgroundColor="White">
+
+
+                <Grid HorizontalOptions="FillAndExpand" x:Name="MenuGrid" VerticalOptions="FillAndExpand"
+                      RowSpacing="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                 
+
+                </Grid>
+
+            </ScrollView>
+        </StackLayout>
+
+
+        </pullToRefresh:PullToRefreshLayout>
+
+        <!--Action bar-->
+        <StackLayout x:Name="AbShadow1" Grid.Row="4" Grid.Column="0" BackgroundColor="#efefef" Opacity="0.2"
+                     Orientation="Vertical"
+                     HeightRequest="1.8" />
+
+        <Frame x:Name="Abar" Grid.Row="5" Grid.Column="0" Padding="0,0,0,0" BackgroundColor="#F5F5F5" HasShadow="True">
+            <Grid ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="1" Grid.Column="0" x:Name="CarteBtn" WidthRequest="28" Opacity="1" Source="carte.png" />
+                <Image Grid.Row="1" Grid.Column="1" x:Name="VotesBtn" HorizontalOptions="Center" Source="heart.png"
+                       VerticalOptions="Center" Opacity="0.1" />
+                <Image Grid.Row="1" Grid.Column="2" x:Name="CardBtn" Opacity="0.1" HorizontalOptions="Center"
+                       Source="card.png" />
+                <Image Grid.Row="1" Grid.Column="3" x:Name="SettingsBtn" Opacity="0.1" HorizontalOptions="Center"
+                       Source="settings.png"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Frame>
+
+        <StackLayout x:Name="AbShadow2" Grid.Row="6" Grid.Column="0" BackgroundColor="Black" Opacity="0.1"
+                     Orientation="Vertical"
+                     HeightRequest="1.8" />
+
+    </Grid>
+
+
+</ContentPage>

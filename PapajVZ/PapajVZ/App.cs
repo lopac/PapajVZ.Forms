@@ -1,12 +1,17 @@
-﻿using Xamarin.Forms;
+﻿using PapajVZ.Model;
+using PapajVZ.Views;
+using Xamarin.Forms;
 
 namespace PapajVZ
 {
     public class App : Application
     {
-        public App()
+        public App(Carte carte,UserVotes userVotes,User user)
         {
-            MainPage = new Views.MainPage();
+             MainPage = new CartePage(carte, userVotes, user);
+            //var a = new Image();
+            
+            //MainPage = new Views.TestingPage();
         }
 
         protected override void OnStart()

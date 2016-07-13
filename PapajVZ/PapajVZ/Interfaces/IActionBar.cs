@@ -1,21 +1,21 @@
 ﻿using System;
-using PapajVZ.Models;
+using PapajVZ.Views;
 
 namespace PapajVZ.Interfaces
 {
-   
-    interface IActionBar
+    public interface IActionBar
     {
-       void CarteViewOnCreate();
-       void VotesViewOnCreate();
-       void CardViewOnCreate();
-       void StatisticsViewOnCreate();
-       void SettingsViewOnCreate();
-       void RefreshActionBar(ImageButton present);
+        ActionBar ActionBar { get; set; }
+        CarteView CarteView { get; set; }
 
-        void CarteOnClick(object sender, EventArgs e);
-        void VotesOnClick(object sender, EventArgs e);
         void CardOnClick(object sender, EventArgs e);
+        void CardViewOnCreate();
+        void CarteOnClick(object sender, EventArgs e);
+        void CarteViewOnCreate();
         void SettingsOnClick(object sender, EventArgs e);
+        void SettingsViewOnCreate();
+        void StatisticsViewOnCreate();
+        void VotesOnClick(object sender, EventArgs e);
+        void VotesViewOnCreate();
     }
 }
