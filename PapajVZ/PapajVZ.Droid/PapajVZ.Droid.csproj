@@ -203,9 +203,6 @@
     <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\comment.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Drawable\calendar.png" />
   </ItemGroup>
   <Import Project="..\PapajVZ\PapajVZ.projitems" Label="Shared" Condition="Exists('..\PapajVZ\PapajVZ.projitems')" />

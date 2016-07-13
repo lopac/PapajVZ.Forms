@@ -18,9 +18,6 @@ namespace PapajVZ.Views
 
         public Label CarteDate { get; set; }
         public Grid MenuGrid { get; set; }
-        public Carte Carte { get; set; }
-        public UserVotes UserVotes { get; set; }
-        public string DeviceId { get; set; }
         public List<object> ActionBarComponents { get; set; }
         public List<Label> MenuTitles { get; set; }
         //public IList<StackLayout> MenuTitlesL { get; set; }
@@ -43,15 +40,15 @@ namespace PapajVZ.Views
             CurrentMenuType = MenuType.Lunch;
 
             CarteDate.Text =
-                $"{new CultureInfo("hr-HR").DateTimeFormat.GetDayName(Carte.DateTime.DayOfWeek).ToUpperInvariant()}, {Carte.DateTime.ToString("dd.MM.yyyy.")}";
+                $"{new CultureInfo("hr-HR").DateTimeFormat.GetDayName(CartePage.Carte.DateTime.DayOfWeek).ToUpperInvariant()}, {CartePage.Carte.DateTime.ToString("dd.MM.yyyy.")}";
 
             var row = 0;
-            for (var i = 0; i < Carte.Menus.Where(x => x.MenuType == MenuType.Lunch).ToList().Count; i++)
+            for (var i = 0; i < CartePage.Carte.Menus.Where(x => x.MenuType == MenuType.Lunch).ToList().Count; i++)
             {
                 MenuGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 MenuGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-                var menu = Carte.Menus.Where(x => x.MenuType == MenuType.Lunch).ToList()[i];
+                var menu = CartePage.Carte.Menus.Where(x => x.MenuType == MenuType.Lunch).ToList()[i];
 
                 MenuTitles.Add(new Label
                 {
@@ -159,7 +156,7 @@ namespace PapajVZ.Views
 
                 VoteBtns.Add(new Image
                 {
-                    Source = UserVotes.Menus.Contains(menu.MenuId) ? "favorite.png" : "n_favorite.png",
+                    Source = CartePage.UserVotes.Menus.Contains(menu.MenuId) ? "favorite.png" : "n_favorite.png",
                     WidthRequest = 24,
                     VerticalOptions = LayoutOptions.Center,
                     GestureRecognizers =
@@ -299,19 +296,19 @@ namespace PapajVZ.Views
 
 
             //unlike
-            if (UserVotes.Menus.Contains(menuId))
+            if (CartePage.UserVotes.Menus.Contains(menuId))
             {
                 voteButton.Source = "n_favorite.png";
-                Carte.Menus.First(x => x.MenuId == menuId).Votes -= 1;
-                (parentLayout.Children[1] as Label).Text = $"Sviđa se: {Carte.Menus.First(x => x.MenuId == menuId).Votes}";
-                UserVotes.Menus.Remove(menuId);
+                CartePage.Carte.Menus.First(x => x.MenuId == menuId).Votes -= 1;
+                (parentLayout.Children[1] as Label).Text = $"Sviđa se: {CartePage.Carte.Menus.First(x => x.MenuId == menuId).Votes}";
+                CartePage.UserVotes.Menus.Remove(menuId);
             }
             else
             {
                 voteButton.Source = "favorite.png";
-                Carte.Menus.First(x => x.MenuId == menuId).Votes += 1;
-                (parentLayout.Children[1] as Label).Text = $"Sviđa se: {Carte.Menus.First(x => x.MenuId == menuId).Votes}";
-                UserVotes.Menus.Add(menuId);
+                CartePage.Carte.Menus.First(x => x.MenuId == menuId).Votes += 1;
+                (parentLayout.Children[1] as Label).Text = $"Sviđa se: {CartePage.Carte.Menus.First(x => x.MenuId == menuId).Votes}";
+                CartePage.UserVotes.Menus.Add(menuId);
             }
 
             voteButton.ScaleAnimate(100, 1.2);
@@ -334,13 +331,13 @@ namespace PapajVZ.Views
 
             var menuId = int.Parse(((menuContainer.Children[0] as StackLayout).Children[0] as Label).Text);
 
-            Carte.Menus.FirstOrDefault(x => x.MenuId == menuId)?.Comments.Add(new Comment
+            CartePage.Carte.Menus.FirstOrDefault(x => x.MenuId == menuId)?.Comments.Add(new Comment
             {
                 Body = entry.Text,
                 User = new User
                 {
-                    DeviceId = DeviceId,
-                    Name = DeviceId
+                    DeviceId = CartePage.User.DeviceId,
+                    Name = CartePage.User.Name
                 }
             });
 
@@ -384,9 +381,9 @@ namespace PapajVZ.Views
 
             CurrentMenuType = menuType;
 
-            for (var i = 0; i < Carte.Menus.Where(x => x.MenuType == menuType).ToList().Count; i++)
+            for (var i = 0; i < CartePage.Carte.Menus.Where(x => x.MenuType == menuType).ToList().Count; i++)
             {
-                var menu = Carte.Menus.Where(x => x.MenuType == menuType).ToList()[i];
+                var menu = CartePage.Carte.Menus.Where(x => x.MenuType == menuType).ToList()[i];
 
                 MenuTitles[i].Text = menu.Name.ToUpperInvariant();
                 MenuBodies[i].Children.Clear();
@@ -404,7 +401,7 @@ namespace PapajVZ.Views
                     FontSize = 17
                 }));
 
-                VoteBtns[i].Source = UserVotes.Menus.Contains(menu.MenuId) ? "favorite.png" : "n_favorite.png";
+                VoteBtns[i].Source = CartePage.UserVotes.Menus.Contains(menu.MenuId) ? "favorite.png" : "n_favorite.png";
 
 
 
