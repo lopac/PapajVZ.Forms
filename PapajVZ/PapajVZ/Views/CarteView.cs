@@ -14,23 +14,28 @@ namespace PapajVZ.Views
 {
     public sealed class CarteView
     {
+
         public CarteHeader CarteHeader { get; set; }
 
         public Label CarteDate { get; set; }
         public Grid MenuGrid { get; set; }
         public List<object> ActionBarComponents { get; set; }
-        public List<Label> MenuTitles { get; set; }
+        private List<Label> MenuTitles { get; set; }
         //public IList<StackLayout> MenuTitlesL { get; set; }
-        public List<StackLayout> MenuBodies { get; set; }
-        public List<Image> VoteBtns { get; set; }
-        public List<Label> VoteLabels { get; set; }
-        public List<StackLayout> CommentsContainers { get; set; }
+        private List<StackLayout> MenuBodies { get; set; }
+        private List<Image> VoteBtns { get; set; }
+        private List<Label> VoteLabels { get; set; }
+        private List<StackLayout> CommentsContainers { get; set; }
 
         public MenuType CurrentMenuType { get; set; }
 
-        public CarteView()
+        public CarteView(Label carteDate, CarteHeader carteHeader, Grid menuGrid, List<object> actionBarComponents)
         {
-           
+            CarteDate = carteDate;
+            CarteHeader = carteHeader;
+            MenuGrid = menuGrid;
+            ActionBarComponents = actionBarComponents;
+
             MenuTitles = new List<Label>();
             MenuBodies = new List<StackLayout>();
             VoteBtns = new List<Image>();
@@ -286,6 +291,10 @@ namespace PapajVZ.Views
 
             }
         }
+
+     
+         
+        
 
         private void OnVoteClick(object sender)
         {

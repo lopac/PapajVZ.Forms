@@ -9,8 +9,6 @@ namespace PapajVZ
         public App(Carte carte,UserVotes userVotes,User user)
         {
              MainPage = new CartePage(carte, userVotes, user);
-            //var a = new Image();
-            
             //MainPage = new Views.TestingPage();
         }
 

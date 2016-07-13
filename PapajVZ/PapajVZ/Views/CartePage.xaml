@@ -6,7 +6,7 @@
              x:Class="PapajVZ.Views.CartePage"
              BackgroundColor="White">
 
-    <Grid  ColumnSpacing="0" RowSpacing="0">
+    <Grid ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
             <RowDefinition Height="35" />
@@ -56,27 +56,25 @@
         </StackLayout>
 
 
-
-        <pullToRefresh:PullToRefreshLayout x:Name="CarteContainer">
-        <StackLayout x:Name="GStackLayout" Grid.Row="3" Grid.Column="0">
-
-
-            <ScrollView BackgroundColor="White">
+        <pullToRefresh:PullToRefreshLayout x:Name="CarteContainer" Grid.Row="3" Grid.Column="0">
+            <StackLayout >
 
 
-                <Grid HorizontalOptions="FillAndExpand" x:Name="MenuGrid" VerticalOptions="FillAndExpand"
-                      RowSpacing="0">
+                <ScrollView BackgroundColor="White">
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
 
-                 
+                    <Grid HorizontalOptions="FillAndExpand" x:Name="MenuGrid" VerticalOptions="FillAndExpand"
+                          RowSpacing="0">
 
-                </Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-            </ScrollView>
-        </StackLayout>
+
+                    </Grid>
+
+                </ScrollView>
+            </StackLayout>
 
 
         </pullToRefresh:PullToRefreshLayout>

@@ -2,22 +2,23 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using ModernHttpClient;
 using Newtonsoft.Json;
 
 namespace PapajVZ.Helpers
 {
     public static class WebApi
     {
-        public static TResult GetRequest<TResult>(string uri)
+        public static TObject GetRequest<TObject>(string uri)
         {
-            var client = new HttpClient();
+            var client = new HttpClient(new NativeMessageHandler());
 
 
             using (var response = client.GetAsync(new Uri(uri)).Result)
             using (var content = response.Content)
             {
                 
-                return JsonConvert.DeserializeObject<TResult>(content.ReadAsStringAsync().Result);
+                return JsonConvert.DeserializeObject<TObject>(content.ReadAsStringAsync().Result);
             }
         }
 

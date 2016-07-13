@@ -41,19 +41,13 @@ namespace PapajVZ.Views
 
         public void CarteViewOnCreate()
         {
-            CarteView = new CarteView
+            CarteView = new CarteView(CarteDate, new CarteHeader
             {
-                CarteDate = CarteDate,
-                CarteHeader = new CarteHeader
-                {
-                    DinnerIndicator = DinnerIndicator,
-                    LunchIndicator = LunchIndicator,
-                    DinnerLabel = DinnerLabel,
-                    LunchLabel = LunchLabel
-                },
-                MenuGrid = MenuGrid,
-                ActionBarComponents = new List<object> {Abar, AbShadow1, AbShadow2},
-            };
+                DinnerIndicator = DinnerIndicator,
+                LunchIndicator = LunchIndicator,
+                DinnerLabel = DinnerLabel,
+                LunchLabel = LunchLabel
+            }, MenuGrid, new List<object> {Abar, AbShadow1, AbShadow2});
         }
 
 
@@ -104,6 +98,4 @@ namespace PapajVZ.Views
             throw new NotImplementedException();
         }
     }
-
-  
 }

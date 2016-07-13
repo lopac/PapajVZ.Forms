@@ -33,7 +33,6 @@ namespace PapajVZ.Droid.Activities
             splashTask.ContinueWith(t => { StartActivity(typeof(MainActivity)); },
                 TaskScheduler.FromCurrentSynchronizationContext());
 
-            splashTask.Start();
         }
     }
 }
