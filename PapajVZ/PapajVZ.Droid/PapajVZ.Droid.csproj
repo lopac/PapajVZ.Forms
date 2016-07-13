@@ -83,6 +83,10 @@
     <Reference Include="OkHttp">
       <HintPath>..\..\Components\modernhttpclient-2.4.2\lib\android\OkHttp.dll</HintPath>
     </Reference>
+    <Reference Include="Refractored.GifImageView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.GifImageView.1.2.0.0\lib\monoandroid\Refractored.GifImageView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Refractored.XamForms.PullToRefresh, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Refractored.XamForms.PullToRefresh.1.0.10\lib\MonoAndroid10\Refractored.XamForms.PullToRefresh.dll</HintPath>
       <Private>True</Private>
@@ -212,10 +216,17 @@
     <AndroidResource Include="Resources\Drawable\calendar.png" />
   </ItemGroup>
   <ItemGroup>
+    <XamarinComponentReference Include="GifImageViewAndroid">
+      <Visible>False</Visible>
+      <Version>1.2.0</Version>
+    </XamarinComponentReference>
     <XamarinComponentReference Include="modernhttpclient">
       <Visible>False</Visible>
       <Version>2.4.2</Version>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\infinity.gif" />
   </ItemGroup>
   <Import Project="..\PapajVZ\PapajVZ.projitems" Label="Shared" Condition="Exists('..\PapajVZ\PapajVZ.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

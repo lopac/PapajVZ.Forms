@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<StackLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -16,12 +16,11 @@
             android:layout_centerInParent="true"
             android:id="@+id/SplashLogo" />
     </RelativeLayout>
-  <ProgressBar
-     android:indeterminate="true"
-     style="?android:attr/progressBarStyleLarge"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_centerInParent="true"
-/>
+  <com.felipecsl.gifimageview.library.GifImageView
+     android:id="@+id/loadingView"
+     android:layout_gravity="center"
+     android:scaleType="fitCenter"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" />
 
-</LinearLayout>
+</StackLayout>

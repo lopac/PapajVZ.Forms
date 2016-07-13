@@ -56,14 +56,14 @@
         </StackLayout>
 
 
-        <pullToRefresh:PullToRefreshLayout x:Name="CarteContainer" Grid.Row="3" Grid.Column="0">
-            <StackLayout >
+        <StackLayout x:Name="CarteContainer" Grid.Row="3" Grid.Column="0">
+
+          <pullToRefresh:PullToRefreshLayout>
+
+            <ScrollView BackgroundColor="White">
 
 
-                <ScrollView BackgroundColor="White">
-
-
-                    <Grid HorizontalOptions="FillAndExpand" x:Name="MenuGrid" VerticalOptions="FillAndExpand"
+              <Grid HorizontalOptions="FillAndExpand" x:Name="MenuGrid" VerticalOptions="FillAndExpand"
                           RowSpacing="0">
 
                         <Grid.ColumnDefinitions>
@@ -73,11 +73,11 @@
 
                     </Grid>
 
-                </ScrollView>
-            </StackLayout>
+            </ScrollView>
+          </pullToRefresh:PullToRefreshLayout>
 
+        </StackLayout>
 
-        </pullToRefresh:PullToRefreshLayout>
 
         <!--Action bar-->
         <StackLayout x:Name="AbShadow1" Grid.Row="4" Grid.Column="0" BackgroundColor="#efefef" Opacity="0.2"
