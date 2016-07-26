@@ -25,26 +25,24 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ExtenstionsMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ViewExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\WebRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IActionBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IActionViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Carte\Article.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Carte\Carte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Carte\Comment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Carte\Menu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DbContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ImageButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Shared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\Balance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\Vote.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\UserVotes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\CarteHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CartePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\CarteView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TestingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ActionBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
@@ -56,7 +54,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Renderers\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
   </ItemGroup>
 </Project>

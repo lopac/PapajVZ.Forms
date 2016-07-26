@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using ModernHttpClient;
 using Newtonsoft.Json;
 
 namespace PapajVZ.Helpers
@@ -11,22 +10,21 @@ namespace PapajVZ.Helpers
     {
         public static TObject GetRequest<TObject>(string uri)
         {
-            var client = new HttpClient(new NativeMessageHandler());
+            var client = new HttpClient();
 
 
             using (var response = client.GetAsync(new Uri(uri)).Result)
             using (var content = response.Content)
             {
-                
+
                 return JsonConvert.DeserializeObject<TObject>(content.ReadAsStringAsync().Result);
             }
         }
 
         //todo USE HTTPCLIENT
-        public static object PostRequest<T>(this T obj, string url)
+        public static bool PostRequest<TObject>(this TObject obj, string url)
         {
-            string result;
-            var httpWebRequest = (HttpWebRequest) WebRequest.Create(url);
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
@@ -38,18 +36,19 @@ namespace PapajVZ.Helpers
                     streamWriter.Write(json);
                 }
 
-                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    result = streamReader.ReadToEnd();
+                    streamReader.ReadToEnd();
                 }
             }
             catch (Exception)
             {
-                return null;
+
+                return false;
             }
 
-            return result;
+            return true;
         }
     }
 }

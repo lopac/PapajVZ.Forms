@@ -6,9 +6,9 @@ namespace PapajVZ
 {
     public class App : Application
     {
-        public App(Carte carte,UserVotes userVotes,User user)
+        public App()
         {
-             MainPage = new CartePage(carte, userVotes, user);
+            MainPage = new CartePage();
             //MainPage = new Views.TestingPage();
         }
 

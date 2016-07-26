@@ -30,7 +30,8 @@
 
 		public override string ToString ()
 		{
-			return string.Format ("[LongPressGestureRecognizer: MinimumPressDuration={0}, NumberOfTouchesRequired={1}, MaxDistanceTolerance={2}, State={2}]", MinimumPressDuration, NumberOfTouchesRequired, MaxDistanceTolerance, State);
+			return
+			    $"[LongPressGestureRecognizer: MinimumPressDuration={MinimumPressDuration}, NumberOfTouchesRequired={NumberOfTouchesRequired}, MaxDistanceTolerance={MaxDistanceTolerance}, State={State}]";
 		}
 		
 	}
