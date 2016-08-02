@@ -56,16 +56,7 @@ namespace PapajVZ.Helpers
             view.IsVisible = true;
         }
 
-        public static void OnClick(this ImageButton imageButton)
-        {
-            CartePage.PreviousClickedButton.Opacity = 0.1;
-
-            imageButton.Opacity = 1;
-            imageButton.ScaleAnimate(length: 120);
-
-            CartePage.PreviousClickedButton = imageButton;
-
-        }
+      
 
         public static IVisualElementRenderer GetRenderer(this BindableObject bindableObject)
         {

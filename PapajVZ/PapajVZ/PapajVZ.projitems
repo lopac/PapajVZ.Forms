@@ -36,22 +36,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\Vote.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User\UserVotes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\CardImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\CardLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderers\ImageButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\CartePage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\MenuGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\ShadowEffect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\TestingPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TestingPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CartePage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\TestingPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <None Include="$(MSBuildThisFileDirectory)Views\TestingPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

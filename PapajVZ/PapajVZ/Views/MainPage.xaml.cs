@@ -10,23 +10,78 @@ using PapajVZ.Model;
 using PapajVZ.Models;
 using PapajVZ.Renderers;
 using Xamarin.Forms;
+using Menu = PapajVZ.Model.Menu;
 using TapGestureRecognizer = PapajVZ.Controls.TapGestureRecognizer;
+using System.Threading.Tasks;
 
 namespace PapajVZ.Views
 {
-    public partial class CartePage : IActionViews
+    public partial class MainPage : IActionViews
     {
-
-        public CartePage()
+        public MainPage()
         {
             InitializeComponent();
 
+            Shared.Carte.Menus.ToList().ForEach(menu => menu.Comments = new List<Comment>
+            {
+                new Comment
+                {
+                    Body = "This is test comment 1",
+                    Menu = menu,
+                    User = new User
+                    {
+                        DeviceId = "bala",
+                        Name = "android"
+                    }
+                },
+                  new Comment
+                {
+                    Body = "This is test comment 2",
+                    Menu = menu,
+                    User = new User
+                    {
+                        DeviceId = "bala",
+                        Name = "vuber"
+                    }
+                },
+                    new Comment
+                {
+                    Body = "Lorem ipsum sit dolor amet",
+                    Menu = menu,
+                    User = new User
+                    {
+                        DeviceId = "bala",
+                        Name = "antonio_lopac"
+                    }
+                }
+            });
 
-            PresentMenu(LunchGrid, x => x.MenuType == MenuType.Lunch);
-            PresentMenu(DinnerGrid, x => x.MenuType == MenuType.Dinner);
-            //PresentMenu(VotesGrid, where: x => Shared.UserVotes.Menus.Contains(x.MenuId));
+            Shared.UserVotes.Menus = new List<int>
+            {
+                13,17,14,18
+            };
 
-            //default view
+
+            Parallel.ForEach(new List<KeyValuePair<MenuType, MenuGrid>>
+            {
+                new KeyValuePair<MenuType, MenuGrid>(MenuType.Lunch,LunchGrid),
+                new KeyValuePair<MenuType, MenuGrid>(MenuType.Dinner,DinnerGrid)
+            }, grid =>
+            {
+                Shared.Carte.Menus.Where(m => m.MenuType == grid.Key).ToList().
+                       ForEach(t => grid.Value.AddMenu(t, this.OnSwipeLeft, this.OnSwipeRight));
+            });
+
+            //Shared.Carte.Menus.Where(m => m.MenuType == MenuType.Lunch).ToList().
+            //    ForEach(t => LunchGrid.AddMenu(t, this.OnSwipeLeft, this.OnSwipeRight));
+
+            //Shared.Carte.Menus.Where(m => m.MenuType == MenuType.Dinner).ToList().
+            //    ForEach(t => DinnerGrid.AddMenu(t, this.OnSwipeLeft, this.OnSwipeRight));
+
+            Shared.Carte.Menus.Where(m => Shared.UserVotes.Menus.Contains(m.MenuId)).ToList().
+                ForEach(t => VotesGrid.AddMenu(t, this.OnSwipeLeft, this.OnSwipeRight));
+
+            _currentMenuType = MenuType.Lunch;
             _currentView = ActionView.Carte;
 
             PreviousClickedButton = CarteBtn;
@@ -57,6 +112,8 @@ namespace PapajVZ.Views
                         LunchLabel.ScaleAnimate(100, 0.8);
 
                         DinnerGrid.Hide();
+                        CarteContainer.ScrollToAsync(0, 0, true);
+
                         LunchGrid.Show();
                     }
                     else if (value == MenuType.Dinner)
@@ -72,6 +129,8 @@ namespace PapajVZ.Views
 
 
                         LunchGrid.Hide();
+                        CarteContainer.ScrollToAsync(0, 0, true);
+
                         DinnerGrid.Show();
                     }
                     _currentMenuType = value;
@@ -109,7 +168,7 @@ namespace PapajVZ.Views
                             break;
                     }
 
-                    //show  new view
+                    //present new view
                     switch (value)
                     {
                         case ActionView.Carte:
@@ -141,34 +200,34 @@ namespace PapajVZ.Views
 
         public void CarteViewOnCreate(object sender, EventArgs e)
         {
-            (sender as ImageButton)?.OnClick();
+            var button = sender as ImageButton;
+            button?.OnClick();
             CurrentView = ActionView.Carte;
 
-            CarteDate.Text = $"{new CultureInfo("hr-HR").DateTimeFormat.GetDayName(Shared.Carte.DateTime.DayOfWeek).ToUpperInvariant()}, {Shared.Carte.DateTime.ToString("dd.MM.yyyy.")}";
-
+            CarteDate.Text =
+                $"{new CultureInfo("hr-HR").DateTimeFormat.GetDayName(Shared.Carte.DateTime.DayOfWeek).ToUpperInvariant()}, {Shared.Carte.DateTime.ToString("dd.MM.yyyy.")}";
         }
 
 
-        public void VotesViewOnCreate(object sender, EventArgs e)
+        public void VotesViewOnCreate(object sender, EventArgs eventArgs)
         {
-            (sender as ImageButton).OnClick();
+            var button = sender as ImageButton;
+            button?.OnClick();
             CurrentView = ActionView.Votes;
-
-
         }
 
-        public void CardViewOnCreate(object sender, EventArgs e)
+        public void CardViewOnCreate(object sender, EventArgs eventArgs)
         {
-            (sender as ImageButton)?.OnClick();
+            var button = sender as ImageButton;
+            button?.OnClick();
             CurrentView = ActionView.Card;
-
         }
 
-        public void SettingsViewOnCreate(object sender, EventArgs e)
+        public void SettingsViewOnCreate(object sender, EventArgs eventArgs)
         {
-            (sender as ImageButton)?.OnClick();
+            var button = sender as ImageButton;
+            button?.OnClick();
             CurrentView = ActionView.Settings;
-
         }
 
 
@@ -182,6 +241,7 @@ namespace PapajVZ.Views
             CurrentMenuType = MenuType.Dinner;
         }
 
+        //<summary><obsolete>
         private void PresentMenu(Grid menuGrid, Expression<Func<Menu, bool>> where)
         {
             menuGrid.Children.Clear();
@@ -193,15 +253,12 @@ namespace PapajVZ.Views
             var voteLabels = new List<Label>();
             var commentContainers = new List<StackLayout>();
 
-            
 
             var row = 0;
-            for (var i = 0; i < Shared.Carte.Menus.Where(where.Compile()).ToList().Count; i++)
+            foreach (var menu in Shared.Carte.Menus.Where(where.Compile()))
             {
                 menuGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 menuGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-
-                var menu = Shared.Carte.Menus.Where(where.Compile()).ToList()[i];
 
                 menuTitles.Add(new Label
                 {
@@ -220,9 +277,12 @@ namespace PapajVZ.Views
                     {
                         new StackLayout
                         {
-                            HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal, Children =
+                            HorizontalOptions = LayoutOptions.CenterAndExpand,
+                            VerticalOptions = LayoutOptions.CenterAndExpand,
+                            Orientation = StackOrientation.Horizontal,
+                            Children =
                             {
-                                menuTitles[i]
+                                menuTitles.Last()
                             }
                         }
                     }
@@ -269,7 +329,7 @@ namespace PapajVZ.Views
                     BackgroundColor = Color.White,
                     TextColor = Color.Black,
                     InputTransparent = true,
-                    Keyboard = Keyboard.Chat
+                    Keyboard = Keyboard.Text
                 };
 
                 commentEntry.Completed += Comment.Add;
@@ -278,19 +338,21 @@ namespace PapajVZ.Views
                 {
                     GestureRecognizers =
                     {
-                        menuSwipeLeft, menuSwipeRight
+                        menuSwipeLeft,
+                        menuSwipeRight
                     },
                     Children =
                     {
                         new Label
                         {
-                            Text = $"{menu.MenuId}", IsVisible = false
+                            Text = $"{menu.MenuId}",
+                            IsVisible = false
                         }
                     }
                 });
 
 
-                menu.Articles.ToList().ForEach(article => menuBodies[i].Children.Add(new Label
+                menu.Articles.ToList().ForEach(article => menuBodies.Last().Children.Add(new Label
                 {
                     Text = article.Item,
                     TextColor = Color.Black,
@@ -325,14 +387,15 @@ namespace PapajVZ.Views
                     }
                 });
 
-                voteLabels[i].ProcessGestureRecognizers();
+                voteLabels.Last().ProcessGestureRecognizers();
 
                 var carteVoteContainer = new StackLayout
                 {
                     Orientation = StackOrientation.Horizontal,
                     Children =
                     {
-                        voteButtons[i], voteLabels[i]
+                        voteButtons.Last(),
+                        voteLabels.Last()
                     }
                 };
 
@@ -343,12 +406,13 @@ namespace PapajVZ.Views
                     BackgroundColor = Color.White,
                     GestureRecognizers =
                     {
-                        commentBodySwipeLeft, commentBodySwipeRight
+                        commentBodySwipeLeft,
+                        commentBodySwipeRight
                     }
                 });
 
 
-                Comment.Render(menu.Comments, commentContainers[i]);
+                Comment.Render(menu.Comments, commentContainers.Last());
 
 
                 menuGrid.Children.Add(new StackLayout
@@ -357,17 +421,29 @@ namespace PapajVZ.Views
                     Padding = new Thickness(8, 0, 8, 0),
                     Children =
                     {
-                        menuBodies[i], new BoxView
+                        menuBodies.Last(),
+                        new BoxView
                         {
-                            HeightRequest = 0.5, WidthRequest = int.MaxValue, BackgroundColor = Color.FromHex("#dcdcdc")
+                            HeightRequest = 0.5,
+                            WidthRequest = int.MaxValue,
+                            BackgroundColor = Color.FromHex("#dcdcdc")
                         },
-                        carteVoteContainer, commentContainers[i], new StackLayout
+                        carteVoteContainer,
+                        commentContainers.Last(),
+                        new StackLayout
                         {
-                            VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.FillAndExpand, Orientation = StackOrientation.Horizontal, BackgroundColor = Color.White, Children =
+                            VerticalOptions = LayoutOptions.Center,
+                            HorizontalOptions = LayoutOptions.FillAndExpand,
+                            Orientation = StackOrientation.Horizontal,
+                            BackgroundColor = Color.White,
+                            Children =
                             {
                                 new Label
                                 {
-                                    TextColor = Color.Black, FontSize = 15, Opacity = 0.6, Text = "Pokaži sve komentare.."
+                                    TextColor = Color.Black,
+                                    FontSize = 15,
+                                    Opacity = 0.6,
+                                    Text = "Pokaži sve komentare.."
                                 }
                             },
                             IsVisible = menu.Comments.Count > 4
@@ -376,13 +452,10 @@ namespace PapajVZ.Views
                     }
                 }, 0, row++);
 
+                voteTapRecognizer.Tapped += (o, ea) => { Vote.OnVoteButtonClick(voteButtons.Last()); };
+                doubleTap.OnAction += (o, ea) => { Vote.OnVoteButtonClick(voteButtons.Last()); };
 
-                var j = i;
-
-                voteTapRecognizer.Tapped += (o, ea) => { Vote.OnVoteButtonClick(voteButtons[j]); };
-                doubleTap.OnAction += (o, ea) => { Vote.OnVoteButtonClick(voteButtons[j]); };
-
-                menuBodies[i].ProcessGestureRecognizers();
+                menuBodies.Last().ProcessGestureRecognizers();
                 commentContainers.Last().ProcessGestureRecognizers();
             }
         }

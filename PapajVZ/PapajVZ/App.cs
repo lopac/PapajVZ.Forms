@@ -8,7 +8,7 @@ namespace PapajVZ
     {
         public App()
         {
-            MainPage = new CartePage();
+            MainPage = new MainPage();
             //MainPage = new Views.TestingPage();
         }
 

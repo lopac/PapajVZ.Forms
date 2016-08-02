@@ -6,6 +6,7 @@ namespace PapajVZ.Interfaces
     {
         Carte,Votes,Card,Settings
     };
+
     public interface IActionViews
     { 
         ActionView CurrentView { get; set; }
